@@ -10,6 +10,9 @@ public class ThreeQuartersTransformation implements Transformation{
 		return 3*value/4;
 	}
 	
+	/**
+	 * Instantiates an ThreeQuartersTransformation instance.
+	 */
 	public ThreeQuartersTransformation() {}
 
 }

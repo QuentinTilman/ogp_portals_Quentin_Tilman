@@ -1,13 +1,18 @@
 package portals;
 
 /**
+ * Each instance of this class represents an Object-Oriented Portal,
+ * that applies a certain transformation to items that are pass through.
+ * 
  * @invar | getTransformation() != null
+ * @invar | getPairedPortal() == null || getPairedPortal().getPairedPortal().equals(this)
  * @author QT
  *
  */
 public class Portal {
 
 	/**
+	 * @invar | pairedPortal == null || pairedPortal.pairedPortal.equals(this)
 	 * @peerObject
 	 */
 	private Portal pairedPortal;
@@ -18,6 +23,8 @@ public class Portal {
 	private Transformation transformation;
 	
 	/**
+	 * Initialises this instance to represent a Portal with a certain given transformation.
+	 * 
 	 * @throws IllegalArgumentException | transformation == null
 	 * @post | getTransformation().equals(transformation)
 	 */
@@ -28,31 +35,56 @@ public class Portal {
 	}
 	
 	/**
+	 * Pairs this portal to another portal 
+	 * such that elements can be passed to the pair portal and endure a certain transformation.
+	 * 
 	 * @throws IllegalArgumentException | other == null 
+	 * @throws IllegalArgumentException | other.getPairedPortal() != null 
+	 * @throws IllegalArgumentException | getPairedPortal() != null 
+	 * @mutates | this, other
 	 * @post | getPairedPortal().equals(other)
 	 * @post | other.getPairedPortal().equals(this)
 	 */
 	public void setPairPortals(Portal other) {
 		if(other == null)
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Given value may not be null.");
+		if(other.getPairedPortal() != null)
+			throw new IllegalArgumentException("The given Portal has already a paired portal.");
+		if(pairedPortal != null)
+			throw new IllegalArgumentException("This portal has already a paired portal.");
 		other.pairedPortal= this;
 		pairedPortal = other;
 	}
 	
 	/**
+	 * Registers the fact that this portal is breaking it's connection with 
+	 * his paired portal.
 	 * 
+	 * @throws IllegalStateException | getPairedPortal() == null
+	 * @mutates this
+	 * @post This portal has no paired portal | getPairedPortal() == null
+	 * @post This portal's old pair portal has no paired portal. | old(getPairedPortal()).getPairedPortal() == null
 	 */
 	public void clearPairPortal() {
+		if (pairedPortal == null)
+            throw new IllegalStateException(
+                "This portal does not have a paired portal.");
 		pairedPortal.pairedPortal = null;
 		pairedPortal = null;
 	}
 	/**
+	 * Returns this portal's paired portal or return null if none is paired.
+	 * 
 	 * @peerObject
 	 */
 	public Portal getPairedPortal(){
 		return pairedPortal;
 	}
 
+	/**
+	 * Returns the transformation that this portal applies to values that are pass through.
+	 * @return
+	 */
 	public Transformation getTransformation() {
 		return transformation;
 	}
