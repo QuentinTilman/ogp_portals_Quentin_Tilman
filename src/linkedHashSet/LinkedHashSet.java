@@ -55,7 +55,13 @@ public class LinkedHashSet implements Set{
 	}
 
 	@Override
+	/**
+	 * @throws IllegalArgumentException | value == null
+	 * @post | old(contains(value)) ? contains(value) && size() == old(size()) + 1 : contains(value) && old(size()) == size() 
+	 */
 	public void add(Object value) {
+		if(value == null)
+			throw new IllegalArgumentException("Value may not be null");
 		if(contains(value))
 			return;
 		Node node = new Node();
@@ -63,11 +69,14 @@ public class LinkedHashSet implements Set{
 		node.previous = sentinel.previous;
 		sentinel.previous.next = node;
 		sentinel.previous = node;
-		buckets.put(node, node);
+		buckets.put(value, node);
 		size ++;
 	}
 
 	@Override
+	/**
+	 * @post | old(contains(value)) ? !contains(value) && size() == old(size()) - 1 : !contains(value) && old(size()) == size() 
+	 */
 	public void remove(Object value) {
 		if(!contains(value))
 			return;
@@ -75,6 +84,6 @@ public class LinkedHashSet implements Set{
 		node.next.previous = node.previous;
 		node.previous.next = node.next;
 		buckets.remove(value);
-		--size;
+		size--;
 	}	
 }

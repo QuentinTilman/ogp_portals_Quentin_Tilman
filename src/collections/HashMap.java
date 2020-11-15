@@ -19,7 +19,8 @@ public class HashMap implements Map {
 	private Map[] buckets;
 	
 	private Map getBucket(Object key) {
-		return buckets[Math.floorMod(key.hashCode(), buckets.length)];
+		int index = Math.floorMod(key.hashCode(), buckets.length);
+		return buckets[index];
 	}
 
 	public Set entrySet() {

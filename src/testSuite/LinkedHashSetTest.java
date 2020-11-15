@@ -38,6 +38,10 @@ public class LinkedHashSetTest {
 		Object[] o3= {a,b,c};
 		assertTrue(Arrays.equals(o3,set.toArray()));
 		
+		set.add(c);
+		assertTrue(3 == set.size());
+		assertTrue(Arrays.equals(o3,set.toArray()));
+		
 		
 		set.remove(a);
 		System.out.print(set.size());

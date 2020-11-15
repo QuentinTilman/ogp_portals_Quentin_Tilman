@@ -4,8 +4,7 @@ public class TwoThridsTransformation implements Transformation{
 
 	@Override
 	/**
-	 * @throws IllegalArgumentException | value < 0
-	 * @post 
+	 * @throws IllegalArgumentException | value >= 0
 	 */
 	public int apply(int value) {
 		if(value < 0)
