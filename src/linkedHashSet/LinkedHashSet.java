@@ -5,7 +5,6 @@ import collections.Set;
 
 /**
  * @author QT
- *
  */
 public class LinkedHashSet implements Set{
 
@@ -15,6 +14,7 @@ public class LinkedHashSet implements Set{
 	 */
 	private HashMap buckets;
 	/**
+	 * @invar | sentinel != null
 	 * @representationObject
 	 */
 	private Node sentinel;
@@ -43,12 +43,6 @@ public class LinkedHashSet implements Set{
 	}
 	
 	@Override
-	/**
-	 * @inspect | this
-	 * @creates | result
-	 * @post | result != null
-	 * 
-	 */
 	public Object[] toArray() {
 		Object[] array = new Object[size];
 		Object[] result = new Object[size];
@@ -70,9 +64,6 @@ public class LinkedHashSet implements Set{
 	}
 
 	@Override
-	/**
-	 * @inspects | this
-	 */
 	public boolean contains(Object value) {
 		return buckets.get(value) != null;
 	}
