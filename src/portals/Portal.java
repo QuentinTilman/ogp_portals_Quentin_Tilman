@@ -2,7 +2,7 @@ package portals;
 
 /**
  * Each instance of this class represents an Object-Oriented Portal,
- * that applies a certain transformation to items that are pass through.
+ * that applies a certain transformation to items that are pass through or comes out.
  * 
  * @invar | getTransformation() != null
  * @invar | getPairedPortal() == null || getPairedPortal().getPairedPortal().equals(this)
@@ -83,7 +83,6 @@ public class Portal {
 
 	/**
 	 * Returns the transformation that this portal applies to values that are pass through.
-	 * @return
 	 */
 	public Transformation getTransformation() {
 		return transformation;
@@ -91,13 +90,17 @@ public class Portal {
 	
 	/**
 	 * 
+	 * Passes a value through the wormhole with both transformations applied consecutively starting
+	 * by the portal that is used to get in the wormhole.
+	 * 
 	 * @throws IllegalArgumentException | value < 0
-	 * @param value
-	 * @return
+	 * @throws IllegalStateException | getPairedPortal() == null
 	 */
 	public int passPortal(int value) {
 		if(value < 0)
 			throw new IllegalArgumentException();
-		return pairedPortal.transformation.apply(value);
+		if(pairedPortal == null)
+			throw new IllegalStateException("You first need to pair this portal with another portal to create a wormhole.");
+		return pairedPortal.transformation.apply(transformation.apply(value));
 	}
 }

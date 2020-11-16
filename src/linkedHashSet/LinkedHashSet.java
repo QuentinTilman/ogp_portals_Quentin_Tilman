@@ -5,7 +5,14 @@ import collections.Set;
 
 public class LinkedHashSet implements Set{
 
+	/**
+	 * @invar | buckets != null
+	 * @representationObject
+	 */
 	private HashMap buckets;
+	/**
+	 * @representationObject
+	 */
 	private Node sentinel;
 	private int size;
 	
@@ -24,7 +31,10 @@ public class LinkedHashSet implements Set{
 		/** @peerObject */
 		private Node next;
 		}
-	
+	/**
+	 * @pre | 0 < capacity
+	 * @post size() == 0
+	 */
 	public LinkedHashSet(int capacity) {
 		this.buckets = new HashMap(capacity);
 		this.sentinel = new Node();
@@ -34,22 +44,36 @@ public class LinkedHashSet implements Set{
 	}
 	
 	@Override
+	/**
+	 * @inspect | this
+	 * @creates | result
+	 * @post | result != null
+	 * 
+	 */
 	public Object[] toArray() {
+		Object[] array = new Object[size];
 		Object[] result = new Object[size];
 		Node node = sentinel.next;
 		for(int i = 0; i < size; i++) {
-			result[i] = node.element;
+			array[i] = node.element;
 			node= node.next;
 		}
+		System.arraycopy(array, 0, result, 0, size);
 		return result;
 	}
 
 	@Override
+	/**
+	 * @post | result == toArray().length
+	 */
 	public int size() {
 		return size;
 	}
 
 	@Override
+	/**
+	 * @inspects | this
+	 */
 	public boolean contains(Object value) {
 		return buckets.get(value) != null;
 	}
@@ -57,7 +81,7 @@ public class LinkedHashSet implements Set{
 	@Override
 	/**
 	 * @throws IllegalArgumentException | value == null
-	 * @post | old(contains(value)) ? contains(value) && size() == old(size()) + 1 : contains(value) && old(size()) == size() 
+	 * @post | old(contains(value)) ? contains(value) && old(size()) == size()  : contains(value) && size() == old(size()) + 1 
 	 */
 	public void add(Object value) {
 		if(value == null)

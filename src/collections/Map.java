@@ -55,11 +55,6 @@ public interface Map {
 	 */
 	Set entrySet();
 	
-	/**
-	 * @post | result == entrySet().stream()
-	 *       |     .filter(e -> ((Entry)e).getKey().equals(key))
-	 *       |     .findFirst().orElse(null)
-	 */
 	Object get(Object key);
 
 	/**

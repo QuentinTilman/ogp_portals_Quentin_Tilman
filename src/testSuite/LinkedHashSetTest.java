@@ -38,6 +38,10 @@ public class LinkedHashSetTest {
 		Object[] o3= {a,b,c};
 		assertTrue(Arrays.equals(o3,set.toArray()));
 		
+		assertTrue(set.contains(a));
+		assertTrue(set.contains(b));
+		assertTrue(set.contains(c));
+		
 		set.add(c);
 		assertTrue(3 == set.size());
 		assertTrue(Arrays.equals(o3,set.toArray()));
@@ -48,6 +52,14 @@ public class LinkedHashSetTest {
 		assertTrue(2 == set.size());
 		Object[] o4= {b,c};
 		assertTrue(Arrays.equals(o4,set.toArray()));
+		
+		set.add(a);
+		set.remove(c);
+		assertTrue(2 == set.size());
+		Object[] o5= {b,a};
+		assertTrue(Arrays.equals(o5,set.toArray()));
+		
+		
 		
 		
 	}
