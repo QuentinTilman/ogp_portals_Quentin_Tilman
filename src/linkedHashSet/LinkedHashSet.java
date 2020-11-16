@@ -3,6 +3,10 @@ package linkedHashSet;
 import collections.HashMap;
 import collections.Set;
 
+/**
+ * @author QT
+ *
+ */
 public class LinkedHashSet implements Set{
 
 	/**
@@ -15,7 +19,7 @@ public class LinkedHashSet implements Set{
 	 */
 	private Node sentinel;
 	private int size;
-	
+
 	private class Node {
 		/**
 		 * @invar | (element == null) == (this == sentinel)  
@@ -31,6 +35,7 @@ public class LinkedHashSet implements Set{
 		/** @peerObject */
 		private Node next;
 		}
+	
 	/**
 	 * @pre | 0 < capacity
 	 * @post size() == 0

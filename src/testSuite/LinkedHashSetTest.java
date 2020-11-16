@@ -17,8 +17,6 @@ public class LinkedHashSetTest {
 		String a = "test0";
 		String b = "test1";
 		String c = "test2";
-		String d = "test3";
-		String e = "test4";
 		
 		assertTrue(0 == set.size());
 		assertTrue( null != set.toArray());
