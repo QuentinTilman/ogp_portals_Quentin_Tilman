@@ -95,6 +95,8 @@ public class Portal {
 	 * 
 	 * @throws IllegalArgumentException | value < 0
 	 * @throws IllegalStateException | getPairedPortal() == null
+	 * @post As transformations are some fractions between 1/2 and 2, after passing the wormhole the result will be between 1/4 and 4 times the given value 
+	 * 			| value*1/4 <= result && result <= value*4
 	 */
 	public int passPortal(int value) {
 		if(value < 0)
