@@ -55,6 +55,12 @@ public interface Map {
 	 */
 	Set entrySet();
 	
+	/**
+	 * @post | result == entrySet().stream()
+	 *       |     .filter(e -> ((Entry)e).getKey().equals(key))
+	 *       |     .map(e -> ((Entry)e).getValue())
+	 *       |     .findFirst().orElse(null)
+	 */
 	Object get(Object key);
 
 	/**
