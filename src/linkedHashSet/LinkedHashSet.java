@@ -22,12 +22,6 @@ public class LinkedHashSet implements Set{
 
 	private class Node {
 		/**
-		 * @invar | (element == null) == (this == sentinel)  
-		 * @invar | previous != null
-		 * @invar | next != null
-		 * @invar | next.previous == this
-		 * @invar | previous.next == this
-		 * 
 		 * @peerObject
 		 */
 		private Node previous;
